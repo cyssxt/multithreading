@@ -16,8 +16,8 @@ public class test {
 
 
 
-//    @Test
-    public static void test(){
+    @Test
+    public void test(){
 
         AbstractTask abstractTask = new AbstractTask(){
             private int run_time = 10;
@@ -46,7 +46,8 @@ public class test {
     }
 
     public static void main(String[] args) {
-        test();
+        test test1 = new test();
+        test1.test();
     }
 
 }
