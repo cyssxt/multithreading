@@ -1,5 +1,5 @@
 # multithread
-多线程处理
+a simple multi-thread utils
 # how to use it
 <pre><code>AbstractTask abstractTask = new AbstractTask(){
     //just to do
