@@ -3,7 +3,6 @@ package com.cyssxt;
 import com.cyssxt.manager.ThreadManager;
 import com.cyssxt.task.AbstractTask;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class test {
         List<AbstractTask> list = new ArrayList<AbstractTask>();
         list.add(abstractTask);
         list.add(abstractTask1);
-        ThreadManager threadManager = ThreadManager.getIntance(1,list);
+        ThreadManager threadManager = ThreadManager.getInstance(1,list);
         threadManager.start();
     }
 

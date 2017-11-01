@@ -10,27 +10,27 @@ import java.util.List;
 public class CoreThread extends Thread{
 
     private final Logger logger = LoggerFactory.getLogger(CoreThread.class);
-    private ThreadManager threadManager;
+    private ThreadContext threadContext;
     private int index;
 
-    public CoreThread(ThreadManager threadManager,int index){
+    public CoreThread(ThreadContext threadContext,int index){
         logger.info("CoreThread=>init:index:{}",index);
-        this.threadManager = threadManager;
+        this.threadContext = threadContext;
         this.index = index;
     }
 
     @Override
     public void run() {
         logger.info("CoreThread=>run:index:{},date={}",index,new Date());
-        List<AbstractTask> abstractTaskList  = threadManager.getThreadConfig().getAbstractTaskList();
+        List<AbstractTask> abstractTaskList  = threadContext.getThreadConfig().getAbstractTaskList();
         AbstractTask abstractTask = abstractTaskList.get(index);
-        this.threadManager.start(abstractTask);
-        abstractTask._start();
+        threadContext.onStart(abstractTask);
+        abstractTask.onStart();
         while(abstractTask.filter()){
-            abstractTask.run();
+            abstractTask.run(threadContext);
         }
         logger.info("CoreThread=>run:end:{},date={}",index,new Date());
-        abstractTask.end();
-        this.threadManager.end(abstractTask);
+        abstractTask.onEnd();
+        threadContext.onEnd(abstractTask);
     }
 }
