@@ -14,17 +14,17 @@ public abstract class AbstractTask {
     private final static Logger logger = LoggerFactory.getLogger(AbstractTask.class);
 
     private int one_time = 1;
-    public abstract void run();
+    public abstract void run(ThreadContext threadContext);
 
     /**
      * you can override run without params,also you can override run with threadContext to get info from threadContext
      * @param threadContext
      */
-    public void run(ThreadContext threadContext){
-        TaskShareMsg taskQueue = threadContext.getTaskShareMsg();
-        logger.info("run=>task queue:{}",taskQueue);
-        run();
-    }
+//    public void run(ThreadContext threadContext){
+//        TaskShareMsg taskQueue = threadContext.getTaskShareMsg();
+//        logger.info("run=>task queue:{}",taskQueue);
+//        run();
+//    }
 
     /**
      *

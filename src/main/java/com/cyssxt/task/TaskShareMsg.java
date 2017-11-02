@@ -10,9 +10,29 @@ import java.util.Map;
  **/
 public class TaskShareMsg {
 
-    public final static Map<String,Object> map = new HashMap<String, Object>();
+    public  Map<String,Object> map = new HashMap<String, Object>();
+    public  LinkStack linkStack = new LinkStack();
 
-    public class LinkStack{
+    /**
+     * 栈压入
+     * @param object
+     */
+    public void push(Object object){
+        synchronized (linkStack){
+            linkStack.push(object);
+        }
+    }
+
+    /**
+     * 栈压出
+     * @return
+     */
+    public Object pop(){
+        synchronized (linkStack){
+            return linkStack.pop();
+        }
+    }
+    public static class LinkStack{
         public class Stack{
             private Stack pre;
             private Stack next;
@@ -56,13 +76,15 @@ public class TaskShareMsg {
             if(top==null){
                 top = bottom;
             }
-            tempStack.next = bottom;
+            if(tempStack!=null){
+                tempStack.next = bottom;
+            }
         }
 
         public Object pop(){
             Stack temp = top;
             top = temp.next;
-            return temp;
+            return temp!=null?temp.object:null;
         }
 
         public boolean isEmpty(){
@@ -76,7 +98,7 @@ public class TaskShareMsg {
      * @param value param value
      * save info by key-value format
      */
-    public static void put(String key,String value){
+    public void put(String key,String value){
         synchronized(map){
             map.put(key,value);
         }
@@ -87,7 +109,7 @@ public class TaskShareMsg {
      * @param key
      * @return get value by key
      */
-    public static Object get(String key){
+    public Object get(String key){
         synchronized(map) {
             return map.get(key);
         }
@@ -96,7 +118,7 @@ public class TaskShareMsg {
     /**
      * clear info in map
      */
-    public static void clear(){
+    public void clear(){
         map.clear();
     }
 }
