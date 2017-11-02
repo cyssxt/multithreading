@@ -36,14 +36,14 @@ while two thread use push or pop at same time, another will in waiting list!
 # how to use key-value cache
 same as stack：
 ## first step(get instance of TaskShareMsg by threadContext)：
-    <pre><code>
-   TaskShareMsg taskShareMsg = threadContext.getTaskShareMsg();
-   taskShareMsg.push("name","cyssxt");
-   </code></pre>
+<pre><code>
+TaskShareMsg taskShareMsg = threadContext.getTaskShareMsg();
+taskShareMsg.push("name","cyssxt");
+</code></pre>
 ## get value by key
-    <pre><code>
-        taskShareMsg.get("name");
-    </code></pre>
+<pre><code>
+    taskShareMsg.get("name");
+</code></pre>
    
    
 
