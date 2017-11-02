@@ -1,6 +1,9 @@
+/**
+ * author:cyssxt
+ * date:2017-10-30
+ */
 package com.cyssxt.thread.core;
 
-import com.cyssxt.manager.ThreadManager;
 import com.cyssxt.task.AbstractTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

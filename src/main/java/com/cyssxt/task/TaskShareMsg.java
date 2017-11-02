@@ -1,5 +1,10 @@
+/**
+ * author:cyssxt
+ */
 package com.cyssxt.task;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,15 +14,25 @@ import java.util.Map;
  * multi-thread share msg
  **/
 public class TaskShareMsg {
-
+    private final static Logger logger = LoggerFactory.getLogger(TaskShareMsg.class);
+    public  static Integer FIRST_ID = 1;
     public  Map<String,Object> map = new HashMap<String, Object>();
     public  LinkStack linkStack = new LinkStack();
+    public int id = 0;
+
+    public TaskShareMsg() {
+        synchronized (FIRST_ID){
+            this.id = ++FIRST_ID;
+        }
+        logger.info("taskShareMsg:init[{}]",this.id);
+    }
 
     /**
      * 栈压入
      * @param object
      */
     public void push(Object object){
+        logger.info("taskShareMsg:push[{}]:{}",this.id,object);
         synchronized (linkStack){
             linkStack.push(object);
         }
@@ -28,6 +43,7 @@ public class TaskShareMsg {
      * @return
      */
     public Object pop(){
+        logger.info("taskShareMsg:pop[{}]",this.id);
         synchronized (linkStack){
             return linkStack.pop();
         }
@@ -99,6 +115,7 @@ public class TaskShareMsg {
      * save info by key-value format
      */
     public void put(String key,String value){
+        logger.info("taskShareMsg:put[{}],key:{},value:{}",this.id,key,value);
         synchronized(map){
             map.put(key,value);
         }
@@ -110,6 +127,7 @@ public class TaskShareMsg {
      * @return get value by key
      */
     public Object get(String key){
+        logger.info("taskShareMsg:get[{}],key:{}",this.id,key);
         synchronized(map) {
             return map.get(key);
         }
@@ -119,6 +137,7 @@ public class TaskShareMsg {
      * clear info in map
      */
     public void clear(){
+        logger.info("taskShareMsg:clear[{}]",this.id);
         map.clear();
     }
 }
