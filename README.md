@@ -1,4 +1,4 @@
-# multithread
+# multithreading(java 多线程)
 a simple multi-thread utils
 ## how to use it
 <pre><code>AbstractTask abstractTask = new AbstractTask(){
